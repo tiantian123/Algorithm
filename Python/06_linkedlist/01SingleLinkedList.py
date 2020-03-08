@@ -117,6 +117,6 @@ class SingleLinkedList(object):
         new_node = Node(value)
         pro = self.__head
         not_found = False # 如果node没有存在于链表中，则该标量设置为True
-        while pro.next_node != node:
+        #while pro.next_node != node:
 
 
