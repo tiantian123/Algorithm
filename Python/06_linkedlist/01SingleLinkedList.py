@@ -7,6 +7,7 @@
 
 class Node(object):
     """链表结构的Node结点"""
+
     def __init__(self, data, next_node=None):
         """
         Node 的初始化方法
@@ -48,10 +49,12 @@ class Node(object):
         """
         self.__next = next_node
 
+
 class SingleLinkedList(object):
     """
     单向链表
     """
+
     def __init__(self):
         """ 单向链表的初始化方法"""
         self.__head = None
@@ -95,7 +98,7 @@ class SingleLinkedList(object):
         :param node: 指定node结点
         :param value: 插入新Node中存储的数据
         """
-        if node is None: # 如果是空结点，则什么都不做
+        if node is None:  # 如果是空结点，则什么都不做
             return
         new_node = Node(value)
         new_node.next_node = node.next_node
@@ -116,7 +119,7 @@ class SingleLinkedList(object):
 
         new_node = Node(value)
         pro = self.__head
-        not_found = False # 如果node没有存在于链表中，则该标量设置为True
+        not_found = False  # 如果node没有存在于链表中，则该标量设置为True
         while pro.next_node != node:
             if pro.next_node is None:
                 not_found = True
@@ -276,4 +279,3 @@ class SingleLinkedList(object):
                 return True
 
         return False
-
