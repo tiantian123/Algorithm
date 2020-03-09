@@ -127,7 +127,7 @@ class SingleLinkedList(object):
             pro.next_node = new_node
             new_node.next_node = node
 
-    def delete_by_node(self, value):
+    def delete_by_value(self, value):
         """
         在链表中删除指定存储数据的Node结点
         :param value: 要删除结点的存储数据
@@ -150,4 +150,130 @@ class SingleLinkedList(object):
         if not_found is False:
             pro.next_node = node.next_node
 
+    def delete_by_node(self, node):
+        """
+        在链表中删除指定结点
+        :param node: 需要删除的结点
+        """
+        if self.__head is None:
+            return
+
+        if node == self.__head:
+            self.__head = node.next_node
+            return
+
+        pro = self.__head
+        not_found = False
+        while pro.next_node != node:
+            if pro.next_node is None:
+                not_found = True
+                break
+            else:
+                pro = pro.next_node
+        if not not_found:
+            pro.next_node = node.next_node
+
+    def delete_last_n_node(self, n):
+        """
+        删除链表中倒数第N个结点
+        主体思路：设置快慢指针，快指针先行n步，之后再快慢指针同时移动。当快指针到达链表尾部时，
+        删除慢指针指向的链表结点
+        :param n: 需要删除的倒数第n个结点
+        """
+        fast = self.__head
+        slow = self.__head
+        step = 0
+
+        while step <= n:
+            fast = fast.next_node
+            step += 1
+
+        while fast.next_node is not None:
+            tmp = slow
+            fast = fast.next_node
+            slow = slow.next_node
+
+        tmp.next_node = slow.next_node
+
+    def find_mid_node(self):
+        """
+        查找链表中的中间结点
+        主体思路：快慢指针，快指针每次跨2步，慢指针跨一步，快指针到链表尾部时，慢指针指向链表中间结点
+        :return: 链表的中间结点
+        """
+        fast = self.__head
+        slow = self.__head
+        # 疑问： 如果链表长度是奇数呢？fast最后跨的2步会不会报错
+        while fast.next_node is not None:
+            fast = fast.next_node.next_node
+            slow = slow.next_node
+
+        return slow
+
+    def create_node(self, value):
+        """
+        创建一个存储value值得结点
+        :param value: 将要存储在node中的数据
+        :return: 新结点
+        """
+        return Node(value)
+
+    def print_all(self):
+        """
+        打印当前链表的所有结点
+        """
+        pos = self.__head
+        if pos is None:
+            print("当前链表为空")
+            return
+        while pos.next_node is not None:
+            print(str(pos.data) + "-->", end="")
+            pos = pos.next_node
+        print(str(pos.data))
+
+    def reversed_self(self):
+        """
+        链表翻转
+        """
+        if self.__head is None or self.__head.next_node is None:
+            return
+
+        pre = self.__head
+        node = self.__head.next_node
+        while node is not None:
+            pre, node = self.__reversed_with_two_node(pre, node)
+
+        self.__head.next_node = None
+        self.__head = pre
+
+    def __reversed_with_two_node(self, pre, node):
+        """
+        翻转相邻的两个结点
+        :param pre: 前结点
+        :param node: 后结点
+        :return: 下一个相邻结点的元组
+        """
+        tmp = node.next_node
+        node.next_node = pre
+        pre = node
+        node = tmp
+        return pre, node
+
+    def has_ring(self):
+        """
+        检查链表中是否有环
+        主体思想：快慢指针，快指针每次2步，慢指针1步，如果快慢指针没有相遇，而是顺利达到链表尾部，
+        说明没有环，否则存在环。
+        :return: True-有环，False-无环
+        """
+        fast = self.__head
+        slow = self.__head
+
+        while (fast.next_node is not None) and (fast is not None):
+            fast = fast.next_node.next_node
+            slow = slow.next_node
+            if fast == slow:
+                return True
+
+        return False
 
