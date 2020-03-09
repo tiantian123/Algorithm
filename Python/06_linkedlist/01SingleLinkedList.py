@@ -117,6 +117,37 @@ class SingleLinkedList(object):
         new_node = Node(value)
         pro = self.__head
         not_found = False # 如果node没有存在于链表中，则该标量设置为True
-        #while pro.next_node != node:
+        while pro.next_node != node:
+            if pro.next_node is None:
+                not_found = True
+                break
+            else:
+                pro = pro.next_node
+        if not not_found:
+            pro.next_node = new_node
+            new_node.next_node = node
+
+    def delete_by_node(self, value):
+        """
+        在链表中删除指定存储数据的Node结点
+        :param value: 要删除结点的存储数据
+        """
+        if self.__head is None:
+            return
+        if self.__head.data == value:
+            self.__head = self.__head.next_node
+
+        pro = self.__head
+        node = self.__head.next_node
+        not_found = False
+        while node.data != value:
+            if node.next_node is None:
+                not_found = True
+                return
+            else:
+                pro = node
+                node = node.next_node
+        if not_found is False:
+            pro.next_node = node.next_node
 
 
