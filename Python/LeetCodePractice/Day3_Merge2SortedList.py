@@ -63,7 +63,7 @@ class Solution:
     def mergeTwoList3(self, l1: ListNode, l2: ListNode) -> ListNode:
         # in-place, iteratively
         if None in (l1, l2):
-            return l1, l2
+            return l1 or l2
         dummy = cur = ListNode(0)
         while l1 and l2:
             cur.next = l1
