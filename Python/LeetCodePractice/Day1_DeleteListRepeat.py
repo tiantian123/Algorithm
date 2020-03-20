@@ -29,7 +29,7 @@ class Solution:
         q = 1
         while q < length:
             if nums[p] != nums[q]:
-                if q - p > 1: # 减少数据转移的次数
+                if q - p > 1:  # 减少数据转移的次数
                     nums[p + 1] = nums[q]
                 p += 1
             q += 1
