@@ -49,8 +49,9 @@ class Trie:
         return True
 # Your Trie object will be instantiated and called as such:
 obj = Trie()
-obj.insert('word')
-obj.insert('worldhello')
-param_2 = obj.search('worldhello')
-param_3 = obj.startsWith('wor')
+word = ['Tries', 'startWith']
+prefix = [[],["a"]]
+obj.insert(word)
+param_2 = obj.search('')
+param_3 = obj.startsWith('a')
 print(param_2,param_3)
